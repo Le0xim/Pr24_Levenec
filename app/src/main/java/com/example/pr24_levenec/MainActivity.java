@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    // 1. Объявляем переменные (убрали AssetManager, так как он не нужен для res/raw)
+    // Объявляем переменные 
     private SoundPool mSoundPool;
     private int mCatSound, mChickenSound, mCowSound, mDogSound, mDuckSound, mSheepSound;
     private int mStreamID;
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 2. Находим кнопки в макете
+        // Находим кнопки в макете
         ImageButton cowButton = findViewById(R.id.image_cow);
         ImageButton chickenButton = findViewById(R.id.image_chicken);
         ImageButton catButton = findViewById(R.id.image_cat);
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ImageButton sheepButton = findViewById(R.id.image_sheep);
         ImageButton dogButton = findViewById(R.id.image_dog);
 
-        // 3. Устанавливаем обработчик нажатий
+        // Устанавливаем обработчик нажатий
         cowButton.setOnClickListener(this);
         chickenButton.setOnClickListener(this);
         catButton.setOnClickListener(this);
@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        // Создаем SoundPool и загружаем звуки при возобновлении активности
+        // Создаем звуки при возобновлении активности
         createNewSoundPool();
 
-        // Передаем имя файла БЕЗ расширения (.mp3), так как это ресурс
+        // Передаем имя файла
         mCowSound = loadSound("cow");
         mChickenSound = loadSound("chicken");
         mCatSound = loadSound("cat");
@@ -57,14 +57,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onPause() {
         super.onPause();
-        // Освобождаем ресурсы SoundPool при паузе
+        // Освобождаем ресурсы при паузе
         if (mSoundPool != null) {
             mSoundPool.release();
             mSoundPool = null;
         }
     }
 
-    // Метод для создания SoundPool (современный)
+    // Метод для создания SoundPool 
     private void createNewSoundPool() {
         AudioAttributes attributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_GAME)
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
     }
 
-    // Метод для создания SoundPool (устаревший, оставим для совместимости по заданию)
+    // Метод для создания SoundPool
     @SuppressWarnings("deprecation")
     private void createOldSoundPool() {
         mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return mStreamID;
     }
 
-    // ОБНОВЛЕННЫЙ МЕТОД загрузки звука из папки res/raw
+    // МЕТОД загрузки звука из папки raw
     private int loadSound(String fileName) {
         // Получаем ID ресурса из папки res/raw по его имени
         int resId = getResources().getIdentifier(fileName, "raw", getPackageName());
