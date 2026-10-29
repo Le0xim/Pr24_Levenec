@@ -89,9 +89,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return mStreamID;
     }
 
-    // МЕТОД загрузки звука из папки raw
+    // Метод загрузки звука 
     private int loadSound(String fileName) {
-        // Получаем ID ресурса из папки res/raw по его имени
+        // Получаем ID ресурса
         int resId = getResources().getIdentifier(fileName, "raw", getPackageName());
 
         if (resId != 0) {
